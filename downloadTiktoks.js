@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const API_URL = "https://api.scrapecreators.com/v2/tiktok/profile/videos";
-const API_KEY = process.env.SCRAPECREATORS_API_KEY;
+const API_KEY = process.env.SCRAPE_CREATORS_API_KEY;
 
 const OUTPUT_DIR = "./downloads";
 const MAX_VIDEOS = 100;
