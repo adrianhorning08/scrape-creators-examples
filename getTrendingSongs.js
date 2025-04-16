@@ -9,7 +9,7 @@ async function fetchSongsPage(page) {
       `https://api.scrapecreators.com/v1/tiktok/songs/popular?page=${page}`,
       {
         headers: {
-          "x-api-key": process.env.SCRAPECREATORS_API_KEY,
+          "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
         },
       }
     );

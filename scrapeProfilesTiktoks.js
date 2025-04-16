@@ -4,7 +4,7 @@ import fs from "graceful-fs";
 dotenv.config();
 
 const API_URL = "https://api.scrapecreators.com/v3/tiktok/profile/videos";
-const API_KEY = process.env.SCRAPECREATORS_API_KEY;
+const API_KEY = process.env.SCRAPE_CREATORS_API_KEY;
 
 async function scrapeTiktoks(handle, max_cursor = null) {
   try {

@@ -14,7 +14,7 @@ const getTikToksFromSong = async (clipId, cursor = 0) => {
       `https://api.scrapecreators.com/v1/tiktok/song/videos?clipId=${clipId}&cursor=${cursor}`,
       {
         headers: {
-          "x-api-key": process.env.SCRAPECREATORS_API_KEY,
+          "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
         },
       }
     );
