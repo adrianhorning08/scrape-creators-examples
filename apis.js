@@ -158,3 +158,28 @@ export async function getLinkedinAdLibraryAdDetail(url) {
     throw new Error(error.message);
   }
 }
+
+export async function scrapeSubredditPosts(subreddit, sort, timeframe, after) {
+  try {
+    let url = `https://api.scrapecreators.com/v1/reddit/subreddit?subreddit=${subreddit}`;
+    if (timeframe) {
+      url += `&timeframe=${timeframe}`;
+    }
+    if (sort) {
+      url += `&sort=${sort}`;
+    }
+    if (after) {
+      url += `&after=${after}`;
+    }
+    console.log(url);
+    const response = await axios.get(url, {
+      headers: {
+        "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error at scrapeSubredditPosts", error.message);
+    console.log(error.response.data);
+  }
+}
