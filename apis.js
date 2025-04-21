@@ -92,3 +92,69 @@ export async function getCompanyAdsOnFacebookAdLibrary(
     console.error("error at getCompanyAdsOnFacebookAdLibrary", error.message);
   }
 }
+
+export async function searchLinkedinAdLibrary({
+  company,
+  keyword,
+  countries,
+  startDate,
+  endDate,
+  paginationToken = null,
+}) {
+  try {
+    let url = "https://api.scrapecreators.com/v1/linkedin/ads/search";
+    const queryParams = [];
+
+    if (company) {
+      queryParams.push(`company=${encodeURIComponent(company)}`);
+    }
+    if (keyword) {
+      queryParams.push(`keyword=${encodeURIComponent(keyword)}`);
+    }
+    if (countries) {
+      queryParams.push(`countries=${encodeURIComponent(countries)}`);
+    }
+    if (startDate) {
+      queryParams.push(`startDate=${encodeURIComponent(startDate)}`);
+    }
+    if (endDate) {
+      queryParams.push(`endDate=${encodeURIComponent(endDate)}`);
+    }
+    if (paginationToken) {
+      queryParams.push(
+        `paginationToken=${encodeURIComponent(paginationToken)}`
+      );
+    }
+
+    if (queryParams.length > 0) {
+      url += `?${queryParams.join("&")}`;
+    }
+
+    const response = await axios.get(url, {
+      headers: {
+        "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error at searchLinkedinAdLibrary", error.message);
+    throw new Error(error.message);
+  }
+}
+
+export async function getLinkedinAdLibraryAdDetail(url) {
+  try {
+    const response = await axios.get(
+      `https://api.scrapecreators.com/v1/linkedin/ad?url=${url}`,
+      {
+        headers: {
+          "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("error at getLinkedinAdLibraryAdDetail", error.message);
+    throw new Error(error.message);
+  }
+}
