@@ -183,3 +183,19 @@ export async function scrapeSubredditPosts(subreddit, sort, timeframe, after) {
     console.log(error.response.data);
   }
 }
+
+export async function scrapeRedditComments(postUrl, amount = 20) {
+  try {
+    let url = `https://api.scrapecreators.com/v1/reddit/post/comments/simple?url=${postUrl}&amount=${amount}`;
+
+    const response = await axios.get(url, {
+      headers: {
+        "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error at scrapeRedditComments", error.message);
+    console.log(error.response.data);
+  }
+}
