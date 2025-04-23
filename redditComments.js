@@ -3,7 +3,7 @@ import fs from "graceful-fs";
 
 (async () => {
   const start = new Date();
-  const amount = 100;
+  const amount = 20;
   const postUrl =
     "https://www.reddit.com/r/AskReddit/comments/ablzuq/people_who_havent_pooped_in_2019_yet_why_are_you";
 
