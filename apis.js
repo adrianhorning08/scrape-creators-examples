@@ -199,3 +199,30 @@ export async function scrapeRedditComments(postUrl, amount = 20) {
     console.log(error.response.data);
   }
 }
+
+export async function scrapeRedditSearch(query, sort, timeframe, after) {
+  try {
+    let url = `https://api.scrapecreators.com/v1/reddit/search?query=${query}`;
+    if (sort) {
+      url += `&sort=${sort}`;
+    }
+
+    if (timeframe) {
+      url += `&timeframe=${timeframe}`;
+    }
+    if (after) {
+      url += `&after=${after}`;
+    }
+
+    const response = await axios.get(url, {
+      headers: {
+        "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error at scrapeRedditSearch", error.message);
+    console.log(error.response.data);
+    throw new Error(error.message);
+  }
+}
