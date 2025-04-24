@@ -54,6 +54,31 @@ export async function scrapeYouTubeChannelVideos(
   }
 }
 
+export async function scrapeYouTubeSearch(
+  query,
+  sortBy,
+  continuationToken = null
+) {
+  try {
+    let url = `https://api.scrapecreators.com/v1/youtube/search?query=${query}`;
+    if (sortBy) {
+      url += `&sortBy=${sortBy}`;
+    }
+    if (continuationToken) {
+      url += `&continuationToken=${continuationToken}`;
+    }
+    const response = await axios.get(url, {
+      headers: {
+        "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+      },
+    });
+    console.log("response", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("error at scrapeYouTubeSearch", error.message);
+  }
+}
+
 export async function searchFacebookAdLibraryForCompanies(companyName) {
   try {
     const response = await axios.get(
