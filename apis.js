@@ -251,3 +251,37 @@ export async function scrapeRedditSearch(query, sort, timeframe, after) {
     throw new Error(error.message);
   }
 }
+
+export async function scrapeInstagramProfile(handle) {
+  try {
+    const response = await axios.get(
+      `https://api.scrapecreators.com/v1/instagram/profile?handle=${handle}`,
+      {
+        headers: {
+          "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("error at scrapeInstagramProfile", error.message);
+    throw new Error(error.message);
+  }
+}
+
+export async function scrapeInstagramPosts(handle) {
+  try {
+    const response = await axios.get(
+      `https://api.scrapecreators.com/v2/instagram/posts?handle=${handle}`,
+      {
+        headers: {
+          "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("error at scrapeInstagramPosts", error.message);
+    throw new Error(error.message);
+  }
+}
