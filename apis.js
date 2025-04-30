@@ -335,3 +335,20 @@ export async function scrapeTweet(url) {
     throw new Error(error.message);
   }
 }
+
+export async function scrapeTruthSocialPosts(handle) {
+  try {
+    const response = await axios.get(
+      `https://api.scrapecreators.com/v1/truthsocial/user/posts?handle=${handle}`,
+      {
+        headers: {
+          "x-api-key": process.env.SCRAPE_CREATORS_API_KEY,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("error at scrapeTruthSocialPosts", error.message);
+    throw new Error(error.message);
+  }
+}
